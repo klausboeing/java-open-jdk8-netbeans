@@ -8,6 +8,8 @@
 
 ## Setup Mac 
  
+ Install https://www.xquartz.org/
+ 
  IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
 
  xhost + $IP
