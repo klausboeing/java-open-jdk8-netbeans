@@ -27,13 +27,11 @@ RUN wget http://download.netbeans.org/netbeans/8.2/final/zip/netbeans-8.2-201609
 USER root 
 
 ARG MAVEN_VERSION=3.5.4
-ARG USER_HOME_DIR="/root"
 ARG SHA=ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ARG BASE_URL=http://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
-RUN mkdir -p /usr/share/maven /usr/share/maven/ref
-
-RUN wget ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz -O /tmp/apache-maven.tar.gz -q \
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+    && wget ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz -O /tmp/apache-maven.tar.gz -q \
     && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha256sum -c - \  
     && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven \
     && rm -f /tmp/apache-maven.tar.gz \
@@ -44,5 +42,4 @@ ENV MAVEN_CONFIG $HOME/.m2
 
 USER netbeans
 
-WORKDIR $HOME
 CMD ~/netbeans/bin/netbeans
