@@ -14,7 +14,7 @@
 
  xhost + $IP
  
- DISPLAY = $IP:0
+ DISPLAY=$IP:0
 
 ## Run
 
